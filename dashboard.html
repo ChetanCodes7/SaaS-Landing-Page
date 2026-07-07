@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaaSify App - Real-Time Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-body">
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <img src="logo.svg" alt="SaaSify Logo">
+        <span>SaaSify Hub</span>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="#overview" class="menu-item active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          Overview
+        </a>
+        <a href="#reports" class="menu-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Automated Reports
+        </a>
+        <a href="#settings" class="menu-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Configuration
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Workspace Content -->
+    <main class="app-main">
+      <header class="app-header">
+        <div class="header-title">
+          <h2>Analytics Console</h2>
+          <p>Real-time telemetry and user metrics monitoring platform.</p>
+        </div>
+        <div class="header-actions">
+          <button id="triggerReport" class="btn btn-secondary btn-sm">⚡ Run Automated Report</button>
+        </div>
+      </header>
+
+      <!-- Grid Cards Grid System -->
+      <section class="dashboard-grid">
+        
+        <!-- Metric Card 1 -->
+        <div class="widget-card animate-scale-up">
+          <div class="card-meta">
+            <span class="meta-label">Active Connections</span>
+            <span class="badge badge-success">Live</span>
+          </div>
+          <div class="card-value" id="activeUsers">1,248</div>
+          <div class="card-footer-text text-success">▲ 12.3% vs previous hour</div>
+        </div>
+
+        <!-- Metric Card 2 -->
+        <div class="widget-card animate-scale-up delay-1">
+          <div class="card-meta">
+            <span class="meta-label">API Latency</span>
+            <span class="badge">Healthy</span>
+          </div>
+          <div class="card-value">24<span class="unit">ms</span></div>
+          <div class="card-footer-text">Optimal routing threshold</div>
+        </div>
+
+        <!-- Metric Card 3 -->
+        <div class="widget-card animate-scale-up delay-2">
+          <div class="card-meta">
+            <span class="meta-label">System Memory Load</span>
+            <span class="badge badge-warning">42%</span>
+          </div>
+          <div class="card-value">3.4<span class="unit">GB</span></div>
+          <div class="card-footer-text text-warning">Cache layers performing optimally</div>
+        </div>
+
+      </section>
+
+      <!-- Chart Visualization Workspace -->
+      <section class="chart-section widget-card animate-scale-up delay-3">
+        <div class="chart-header">
+          <h3>Throughput Performance (Ops/Sec)</h3>
+          <p>Live visualization canvas tracking transactional pipelines.</p>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="liveThroughputChart"></canvas>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Real-time Chart Data Engine Injection -->
+  <script>
+    const canvas = document.getElementById('liveThroughputChart');
+    const ctx = canvas.getContext('2d');
+    let dataPoints = Array.from({length: 20}, () => Math.floor(Math.random() * 60) + 20);
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = 250;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function drawChart() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const padding = 40;
+      const chartWidth = canvas.width - padding * 2;
+      const chartHeight = canvas.height - padding * 2;
+      const stepX = chartWidth / (dataPoints.length - 1);
+      
+      // Draw grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for(let i = 0; i <= 4; i++) {
+        let y = padding + (chartHeight / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(canvas.width - padding, y);
+        ctx.stroke();
+      }
+
+      // Draw Gradient Line Chart
+      ctx.beginPath();
+      for(let i = 0; i < dataPoints.length; i++) {
+        let x = padding + i * stepX;
+        let y = canvas.height - padding - (dataPoints[i] / 100) * chartHeight;
+        if(i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      
+      ctx.strokeStyle = '#6366f1';
+      ctx.lineWidth = 3;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = 'rgba(99, 102, 241, 0.4)';
+      ctx.stroke();
+      ctx.shadowBlur = 0; // reset shadow
+
+      // Dynamic User Count Simulator
+      document.getElementById('activeUsers').innerText = (1200 + Math.floor(Math.random() * 80)).toLocaleString();
+    }
+
+    // Stream and shift data arrays smoothly
+    setInterval(() => {
+      dataPoints.shift();
+      dataPoints.push(Math.floor(Math.random() * 55) + 30);
+      drawChart();
+    }, 1500);
+
+    drawChart();
+
+    // Setup action button interceptor
+    document.getElementById('triggerReport').addEventListener('click', () => {
+      alert('📊 Automated Reporting Engine triggered. Secure payload compiled and sent to system admin logs.');
+    });
+  </script>
+</body>
+</html>
